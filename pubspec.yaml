@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.6.6
   carousel_slider: ^5.0.0
+  share_plus: ^10.1.4
+  torch_light: ^1.1.0
+  vibration: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +85,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+      - family: Bangers
+        fonts:
+          - asset: assets/fonts/Bangers-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

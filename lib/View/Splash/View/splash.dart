@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:pranks/Utils/ccolors.dart';
-
 import '../../Home/View/home.dart';
+import 'package:flutter/material.dart';
+import 'package:pranks/Utils/ccolors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Text(
           "PRANKS",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
     );

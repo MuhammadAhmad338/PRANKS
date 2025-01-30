@@ -15,9 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: 'PRANKS',
+        fallbackLocale: const Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
+          fontFamily: "Bangers",
         ),
         initialBinding: Initialbindings(),
         home: const SplashScreen());
