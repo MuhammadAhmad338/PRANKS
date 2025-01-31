@@ -26,7 +26,7 @@ class SwitchListTileWidget extends StatelessWidget {
             onChanged: onChanged,
             activeColor: Colors.transparent,
             inactiveThumbColor: Colors.green,
-            activeTrackColor: Colors.greenAccent,
+            activeTrackColor: Colors.lightGreenAccent,
             thumbColor: WidgetStateProperty.all(Colors.yellow),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           )),

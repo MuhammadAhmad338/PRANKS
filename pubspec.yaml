@@ -40,6 +40,7 @@ dependencies:
   share_plus: ^10.1.4
   torch_light: ^1.1.0
   vibration: ^3.1.2
+  purchases_flutter: ^8.4.4
 
 dev_dependencies:
   flutter_test:

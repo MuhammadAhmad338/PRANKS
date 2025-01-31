@@ -4,24 +4,37 @@ import 'package:flutter/material.dart';
 import '../View/Settings/View/Settings.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  final String title;
+  const CustomAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: CColors.yellowColor,
         centerTitle: true,
-        actions:  [
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Image.asset(
+            "assets/images/backarrow.png",
+            height: 24,
+            width: 24,
+          ),
+        ),
+        actions: [
           GestureDetector(
             onTap: () => Get.to(() => const SettingsScreen()),
-            child: const Padding(
-              padding: EdgeInsets.only(right: 12),
-              child: Icon(Icons.settings, size: 32, color: CColors.blackColor),
+            child:  Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Image.asset(
+                "assets/images/settings.png",
+                height: 30,
+                width: 30,
+              ),
             ),
           ),
         ],
-        title: const Text("PRANKS",
-            style: TextStyle(
+        title: Text(title,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 30,
               color: CColors.blackColor,

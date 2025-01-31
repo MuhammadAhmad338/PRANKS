@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pranks/Utils/ccolors.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:pranks/Widgets/customAppBar.dart';
 import '../../../Controller/flashController.dart';
 import '../../../Controller/switchController.dart';
 import 'package:pranks/Widgets/switchListTile.dart';
@@ -16,74 +17,11 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    final FlashlightController _flashlightController =
-        Get.find<FlashlightController>();
     final SwitchViewModel _switchViewModel = Get.find<SwitchViewModel>();
+    final FlashlightController _flashlightController = Get.find<FlashlightController>();
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 1,
-        centerTitle: true,
-        backgroundColor:
-            Colors.transparent, // Make AppBar transparent to show gradient
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: CColors.yellowGradient,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-        ),
-        title: const Text(
-          "Settings",
-          style: TextStyle(
-            color: CColors.whiteColor,
-            fontWeight: FontWeight.w900,
-            fontSize: 28,
-            letterSpacing: 2,
-            shadows: [
-              Shadow(
-                color: CColors.purpleAccentColor,
-                offset: Offset(3, 3),
-                blurRadius: 0,
-              ),
-              Shadow(
-                color: CColors.purpleAccentColor,
-                offset: Offset(-2, -2),
-                blurRadius: 0,
-              ),
-              Shadow(
-                color: CColors.purpleAccentColor,
-                offset: Offset(2, -2),
-                blurRadius: 0,
-              ),
-              Shadow(
-                color: CColors.purpleAccentColor,
-                offset: Offset(-2, 2),
-                blurRadius: 0,
-              ),
-            ],
-          ),
-        ),
-        leading: GestureDetector(
-          onTap: () {
-            // if (_switchViewModel.clickSoundSwitch.value == true) {
-            //   //           final audioController = Get.find<AudioController>();
-            //   //   audioController.playBeep();
-            //   Get.back();
-            // }
-            Get.back();
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Image.asset(
-              'assets/images/back.png',
-              scale: 1.4,
-            ),
-          ),
-        ),
-      ),
+      appBar: const CustomAppBar(title: "Settings"),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

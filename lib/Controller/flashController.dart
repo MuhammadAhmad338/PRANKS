@@ -4,6 +4,7 @@ import 'package:torch_light/torch_light.dart';
 class FlashlightController extends GetxController {
   bool _isFlickering = false;
   final RxBool _isSwitchEnabled = false.obs;
+  
   bool get isFlickering => _isFlickering;
   RxBool get isSwitchEnabled => _isSwitchEnabled;
 

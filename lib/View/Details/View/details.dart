@@ -52,7 +52,7 @@ class DetailsScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    // play audio
+                   
                     
                   },
                   child: Container(
