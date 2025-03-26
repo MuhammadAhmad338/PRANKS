@@ -5,25 +5,35 @@ import '../View/Settings/View/Settings.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CustomAppBar({Key? key, required this.title}) : super(key: key);
+  const CustomAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: CColors.yellowColor,
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: Image.asset(
-            "assets/images/backarrow.png",
-            height: 24,
-            width: 24,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: CColors.yellowGradient,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
         ),
+        centerTitle: true,
+        leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset(
+                "assets/images/bestarrow.png",
+                height: 15,
+                width: 15,
+              ),
+            )),
         actions: [
           GestureDetector(
             onTap: () => Get.to(() => const SettingsScreen()),
-            child:  Padding(
+            child: Padding(
               padding: const EdgeInsets.only(right: 12),
               child: Image.asset(
                 "assets/images/settings.png",

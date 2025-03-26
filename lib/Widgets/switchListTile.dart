@@ -6,19 +6,19 @@ class SwitchListTileWidget extends StatelessWidget {
   final RxBool value;
   final ValueChanged<bool> onChanged;
 
-  SwitchListTileWidget({
-    Key? key,
+  const SwitchListTileWidget({
+    super.key,
     required this.title,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 25),
+        style: const TextStyle(fontSize: 20),
       ),
       onTap: () {},
       trailing: Obx(() => Switch(
@@ -26,7 +26,7 @@ class SwitchListTileWidget extends StatelessWidget {
             onChanged: onChanged,
             activeColor: Colors.transparent,
             inactiveThumbColor: Colors.green,
-            activeTrackColor: Colors.lightGreenAccent,
+            activeTrackColor: Colors.amber,
             thumbColor: WidgetStateProperty.all(Colors.yellow),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           )),

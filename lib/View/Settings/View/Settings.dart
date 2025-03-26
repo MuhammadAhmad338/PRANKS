@@ -6,6 +6,7 @@ import 'package:pranks/Widgets/customAppBar.dart';
 import '../../../Controller/flashController.dart';
 import '../../../Controller/switchController.dart';
 import 'package:pranks/Widgets/switchListTile.dart';
+import 'package:pranks/View/Subscription/View/subscription.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,8 +18,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    final SwitchViewModel _switchViewModel = Get.find<SwitchViewModel>();
-    final FlashlightController _flashlightController = Get.find<FlashlightController>();
+    SwitchViewModel switchViewModel = Get.find<SwitchViewModel>();
+    FlashlightController flashlightController = Get.find<FlashlightController>();
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Settings"),
@@ -28,17 +29,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(
-                vertical: 6,
-                horizontal: 6,
-              ),
+              margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
+                color: CColors.whiteColor,
+                borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: CColors.blackColor, width: 2.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: CColors.blackColor.withOpacity(0.2),
                     offset: const Offset(0, 7),
                     blurRadius: 10,
                     spreadRadius: 0,
@@ -49,22 +47,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 elevation: 0, // Remove default card elevation
                 margin: EdgeInsets.zero, // Remove default card margin
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   children: [
                     SwitchListTileWidget(
                       title: 'FLASH',
-                      value: _flashlightController.isSwitchEnabled,
+                      value: flashlightController.isSwitchEnabled,
                       onChanged: (bool value) {
-                        _flashlightController.setSwitchEnabled(value);
+                        flashlightController.setSwitchEnabled(value);
                       },
                     ),
                     SwitchListTileWidget(
                       title: 'VIBRATE',
-                      value: _switchViewModel.vibrateSoundSwitch,
+                      value: switchViewModel.vibrateSoundSwitch,
                       onChanged: (bool value) {
-                        _switchViewModel.enableVibration(value);
+                        switchViewModel.enableVibration(value);
                       },
                     ),
                   ],
@@ -79,12 +77,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 horizontal: 6,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
+                color: CColors.whiteColor,
+                borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: CColors.blackColor, width: 2.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: CColors.blackColor.withOpacity(0.2),
                     offset: const Offset(0, 7),
                     blurRadius: 10,
                     spreadRadius: 0,
@@ -95,23 +93,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 elevation: 0, // Remove default card elevation
                 margin: EdgeInsets.zero, // Remove default card margin
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   children: [
                     ListTile(
                       title: const Text(
                         "Subscription",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 20),
                       ),
                       onTap: () {
-                        //   Get.to(() => SubscriptionScreen());
+                        Get.to(() => const SubscriptionPage());
                       },
                     ),
                     ListTile(
                       title: const Text(
                         "Rate Us",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 20),
                       ),
                       onTap: () {
                         Get.snackbar(
@@ -119,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           "Rate us feature will be available soon",
                           snackPosition: SnackPosition.BOTTOM,
                           backgroundColor: CColors.yellowColor,
-                          colorText: Colors.black,
+                          colorText: CColors.blackColor,
                           duration: const Duration(seconds: 2),
                         );
                       },
@@ -127,7 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ListTile(
                       title: const Text(
                         "Privacy Policy",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 20),
                       ),
                       onTap: () {
                         // Get.to(() => const PrivacyPolicyScreen());
@@ -136,7 +134,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ListTile(
                       title: const Text(
                         "Share Apps",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 20),
                       ),
                       onTap: () {
                         Share.share(

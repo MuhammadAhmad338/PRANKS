@@ -36,15 +36,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   get: ^4.6.6
-  carousel_slider: ^5.0.0
   share_plus: ^10.1.4
   torch_light: ^1.1.0
   vibration: ^3.1.2
   purchases_flutter: ^8.4.4
+  in_app_purchase: ^3.2.1
+  audioplayers: ^6.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -55,6 +58,13 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/pranksounds.png"
+  adaptive_icon_background: "#ffffff"
+  
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -74,6 +84,9 @@ flutter:
     - assets/sounds/gun/
     - assets/sounds/tazer/
     - assets/sounds/beep/
+    - assets/sounds/horn/
+    - assets/sounds/scissors/
+    - assets/sounds/hairdryer/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

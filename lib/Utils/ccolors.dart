@@ -13,9 +13,9 @@ class CColors {
   static const transparentColor = Color(0x00000000);
   static const purpleAccentColor = Color(0xFF6A1B9A);
 
-
-  static const pinkGradient = [Color(0xFFEC87BF), Color(0xFFA80C68)];
   static const greenGradient = [Color(0xFF159F7D), Color(0xff178E71)];
   static const yellowGradient = [Color(0xFFFEDF91), Color(0xFFFFC44F)];
   static const purpleGradient = [Color(0xFF7859C6), Color(0xFF524279)];
+  static const pinkGradient = [Color(0xFFEC87BF), Color(0xFFA80C68)];
+
 }
