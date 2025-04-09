@@ -1,0 +1,2 @@
+C:/flutterprojects/pranks/android/app/.cxx/RelWithDebInfo/5d6w415f/x86/CMakeFiles/edit_cache.dir
+C:/flutterprojects/pranks/android/app/.cxx/RelWithDebInfo/5d6w415f/x86/CMakeFiles/rebuild_cache.dir

@@ -168,3 +168,29 @@ const List<String> hairdryerimages = [
   "assets/images/hairdryer5.png",
   "assets/images/hairdryer6.png",
 ];
+
+const List<String> glassimages = [
+  "assets/images/glass1.png",
+  "assets/images/glass2.png",
+  "assets/images/glass3.png"
+];
+
+const List<String> glasssounds = [
+  "sounds/glass/glass1.mp3",
+  "sounds/glass/glass2.mp3",
+  "sounds/glass/glass3.mp3",
+];
+
+const List<String> pianoimages = [
+  "assets/images/piano1.png",
+  "assets/images/piano2.png",
+  "assets/images/piano3.png",
+  "assets/images/piano4.png"
+];
+
+const List<String> pianosounds = [
+  "sounds/piano/piano1.mp3",
+  "sounds/piano/piano2.mp3",
+  "sounds/piano/piano3.mp3",
+  "sounds/piano/piano4.mp3",
+];

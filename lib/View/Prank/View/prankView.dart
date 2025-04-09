@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pranks/Model/CarousalDataModel.dart';
+import 'package:flutter/material.dart';
 import 'package:pranks/Utils/ccolors.dart';
+import 'package:pranks/Model/CarousalDataModel.dart';
+import 'package:pranks/Utils/const.dart';
 import 'package:pranks/View/PrankSounds/View/prankSounds.dart';
 
 class PrankScreen extends StatelessWidget {
@@ -18,17 +19,23 @@ class PrankScreen extends StatelessWidget {
             item.label,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
+              color: CColors.whiteColor,
               fontSize: 30,
               wordSpacing: 3,
-              color: CColors.whiteColor,
             ),
           ),
+          leading: GestureDetector(
+            onTap: () => Get.back(),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Image.asset(backUrl, height: 30, width: 30,),
+            )),
           flexibleSpace: Container(
               decoration: const BoxDecoration(
                   gradient: LinearGradient(
-            colors: CColors.yellowGradient,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+                  colors: CColors.yellowGradient,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
           )))),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -44,7 +51,7 @@ class PrankScreen extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 // Navigate to PrankScreen with the selected item data
-                //  Get.to(() => PrankScreen(item: carouselData[index]));
+                //  Get.to(() => PrankScrseen(item: carouselData[index]));
                 Get.to(() => PrankScreenView(
                       label: item.label,
                       audio: item.audioUrls[index],

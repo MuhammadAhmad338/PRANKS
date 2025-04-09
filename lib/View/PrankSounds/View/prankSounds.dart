@@ -8,7 +8,6 @@ import 'package:pranks/Controller/switchController.dart';
 import 'package:pranks/View/Settings/View/Settings.dart';
 import 'package:pranks/Widgets/prankContainer.dart';
 
-
 class PrankScreenView extends StatefulWidget {
   final List<String> audios;
   final String label;
@@ -31,7 +30,6 @@ class PrankScreenView extends StatefulWidget {
 
 class _PrankScreenViewState extends State<PrankScreenView>
     with SingleTickerProviderStateMixin {
-
   final double listViewHeight = 100.0;
   int? selectedIndex;
   late String currentImage;
@@ -100,7 +98,7 @@ class _PrankScreenViewState extends State<PrankScreenView>
     return Scaffold(
       body: Column(
         children: [
-          Expanded( 
+          Expanded(
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
@@ -121,59 +119,60 @@ class _PrankScreenViewState extends State<PrankScreenView>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            audioController.stopAudio();
-                            Get.back();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 50),
-                            child: Image.asset(backUrl, scale: 1.5),
-                          )
-                        ),
-                        Text(
-                          widget.label,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: CColors.whiteColor,
-                            shadows: [
-                              Shadow(
-                                color: CColors.purpleAccentColor,
-                                offset: Offset(3, 3),
-                                blurRadius: 0,
+                            onTap: () {
+                              audioController.stopAudio();
+                              Get.back();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Image.asset(backUrl, scale: 1.5),
+                            )),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              widget.label,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: CColors.whiteColor,
+                                shadows: [
+                                  Shadow(
+                                    color: CColors.purpleAccentColor,
+                                    offset: Offset(3, 3),
+                                    blurRadius: 0,
+                                  ),
+                                  Shadow(
+                                    color: CColors.purpleAccentColor,
+                                    offset: Offset(-2, -2),
+                                    blurRadius: 0,
+                                  ),
+                                  Shadow(
+                                    color: CColors.purpleAccentColor,
+                                    offset: Offset(2, -2),
+                                    blurRadius: 0,
+                                  ),
+                                  Shadow(
+                                    color: CColors.purpleAccentColor,
+                                    offset: Offset(-2, 2),
+                                    blurRadius: 0,
+                                  ),
+                                ],
+                                letterSpacing: 2,
+                                fontSize: 28,
                               ),
-                              Shadow(
-                                color: CColors.purpleAccentColor,
-                                offset: Offset(-2, -2),
-                                blurRadius: 0,
-                              ),
-                              Shadow(
-                                color: CColors.purpleAccentColor,
-                                offset: Offset(2, -2),
-                                blurRadius: 0,
-                              ),
-                              Shadow(
-                                color: CColors.purpleAccentColor,
-                                offset: Offset(-2, 2),
-                                blurRadius: 0,
-                              ),
-                            ],
-                            letterSpacing: 2,
-                            fontSize: 28,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(() => const SettingsScreen()),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 50,
-                            ),
-                            child: Image.asset(settingsUrl, scale: 1.4),
-                          )
-                        ),
+                            onTap: () => Get.to(() => const SettingsScreen()),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Image.asset(settingsUrl, scale: 1.4),
+                            )),
                       ],
                     ),
                   ),
-                  const SizedBox(height:12),
+                  const SizedBox(height: 12),
                   Padding(
                     padding: const EdgeInsets.all(80),
                     child: GestureDetector(
@@ -207,7 +206,7 @@ class _PrankScreenViewState extends State<PrankScreenView>
                           padding: const EdgeInsets.only(left: 25),
                           child: Image.asset(
                             currentImage,
-                             height: 200,
+                            height: 200,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -295,4 +294,3 @@ class _PrankScreenViewState extends State<PrankScreenView>
     super.dispose();
   }
 }
-

@@ -1,4 +1,4 @@
-package com.example.pranks
+package com.yourprankname.pranks
 
 import io.flutter.embedding.android.FlutterActivity
 

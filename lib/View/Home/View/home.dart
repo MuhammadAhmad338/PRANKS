@@ -71,6 +71,20 @@ class _HomeScreenState extends State<HomeScreen> {
       images: scissorimages,
       gradient: CColors.greenGradient,
     ),
+    CarouselItemModel(
+      label: 'Glass Sound',
+      image: 'assets/images/glass1.png',
+      audioUrls: glasssounds,
+      images: glassimages,
+      gradient: CColors.yellowGradient,
+    ),
+    CarouselItemModel(
+      label: 'Piano Sound',
+      image: 'assets/images/piano1.png',
+      audioUrls: pianosounds,
+      images: pianoimages,
+      gradient: CColors.pinkGradient,
+    ),
   ];
 
   @override
@@ -121,9 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: carouselData.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              Get.to(() => PrankScreen(item: carouselData[index]));
-            },
+            onTap: () => Get.to(() => PrankScreen(item: carouselData[index])),
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Container(
@@ -147,9 +159,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12),
-                    child: Image.asset(
-                      carouselData[index].image,
-                      fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: 100, 
+                      height: 100, 
+                      child: Image.asset(
+                        carouselData[index].image,
+                    
+                        fit: BoxFit
+                            .contain, // Ensures it fits within the given size
+                      ),
                     ),
                   ),
                 ),

@@ -18,8 +18,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    SwitchViewModel switchViewModel = Get.find<SwitchViewModel>();
-    FlashlightController flashlightController = Get.find<FlashlightController>();
+    final SwitchViewModel switchViewModel = Get.find<SwitchViewModel>();
+    final FlashlightController flashlightController = Get.find<FlashlightController>();
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Settings"),
@@ -36,7 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 border: Border.all(color: CColors.blackColor, width: 2.0),
                 boxShadow: [
                   BoxShadow(
-                    color: CColors.blackColor.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     offset: const Offset(0, 7),
                     blurRadius: 10,
                     spreadRadius: 0,
@@ -82,10 +82,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 border: Border.all(color: CColors.blackColor, width: 2.0),
                 boxShadow: [
                   BoxShadow(
-                    color: CColors.blackColor.withOpacity(0.2),
-                    offset: const Offset(0, 7),
                     blurRadius: 10,
                     spreadRadius: 0,
+                    offset: const Offset(0, 7),
+                    color: Colors.black.withValues(alpha: 0.2),
                   ),
                 ],
               ),

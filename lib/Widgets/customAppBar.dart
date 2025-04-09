@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import '../Utils/ccolors.dart';
 import 'package:flutter/material.dart';
+import 'package:pranks/Utils/const.dart';
 import '../View/Settings/View/Settings.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -23,13 +24,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: GestureDetector(
             onTap: () => Get.back(),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Image.asset(
-                "assets/images/bestarrow.png",
-                height: 15,
-                width: 15,
+                backUrl,
+        height: 30,
+        width: 30,
               ),
-            )),
+        )),
         actions: [
           GestureDetector(
             onTap: () => Get.to(() => const SettingsScreen()),
