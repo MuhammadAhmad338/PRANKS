@@ -27,10 +27,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Image.asset(
                 backUrl,
-        height: 30,
-        width: 30,
+                height: 30,
+                width: 30,
               ),
-        )),
+            )),
         actions: [
           GestureDetector(
             onTap: () => Get.to(() => const SettingsScreen()),
@@ -50,6 +50,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               fontSize: 30,
               color: CColors.blackColor,
               wordSpacing: 1,
+              shadows: [
+                                  Shadow(
+                                    color: CColors.blackColor,
+                                    offset: Offset(0, 2),
+                                    blurRadius: 3,
+                                  ),
+                                ],
             )));
   }
 

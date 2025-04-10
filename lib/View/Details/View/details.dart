@@ -1,7 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:pranks/Model/CarousalDataModel.dart';
 import 'package:pranks/Utils/ccolors.dart';
 import 'package:pranks/Widgets/customAppBar.dart';
+import 'package:pranks/Model/CarousalDataModel.dart';
 
 class DetailsScreen extends StatelessWidget {
   final CarouselItemModel item;
@@ -41,7 +43,7 @@ class DetailsScreen extends StatelessWidget {
             ),
             child: Image.asset(
               item.image,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 20),
@@ -82,7 +84,7 @@ class DetailsScreen extends StatelessWidget {
                     child: Center(
                       child: Image.asset(
                         item.images[index],
-                        scale: 1,
+                        height: 100,
                         fit: BoxFit.fill,
                       ),
                     ),

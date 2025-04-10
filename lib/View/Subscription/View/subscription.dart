@@ -1,127 +1,8 @@
-// import 'package:get/get.dart';
-// import '../../../Utils/ccolors.dart';
-// import 'package:flutter/material.dart';
-// import 'package:pranks/Controller/subscriptionController.dart';
-
-// class SubscriptionPage extends StatefulWidget {
-//   const SubscriptionPage({super.key});
-
-//   @override
-//   State<SubscriptionPage> createState() => _SubscriptionPageState();
-// }
-
-// class _SubscriptionPageState extends State<SubscriptionPage> {
-//   final SubscriptionController controller = Get.find<SubscriptionController>();
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     controller.initPurchases();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: const Text('Premium Features',
-//             style: TextStyle(
-//                 fontWeight: FontWeight.bold, fontSize: 24, letterSpacing: 1)),
-//         backgroundColor: CColors.yellowColor,
-//       ),
-//       body: Obx(() {
-//         if (controller.isLoading.value) {
-//           return const Center(child: CircularProgressIndicator());
-//         }
-
-//         if (controller.isSubscribed.value) {
-//           return const Center(
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 Icon(Icons.check_circle, color: Colors.green, size: 64),
-//                 SizedBox(height: 16),
-//                 Text(
-//                   'Premium Member',
-//                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//                 ),
-//                 SizedBox(height: 8),
-//                 Text('You have access to all premium features!'),
-//               ],
-//             ),
-//           );
-//         }
-
-//         final currentOffering = controller.offerings.value?.current;
-//         if (currentOffering == null ||
-//             currentOffering.availablePackages.isEmpty) {
-//           return const Center(
-//               child: Text('No subscription packages available right now.'));
-//         }
-
-//         return SingleChildScrollView(
-//           child: Padding(
-//             padding: const EdgeInsets.all(16.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.stretch,
-//               children: [
-//                 const Text(
-//                   'Unlock Premium Features',
-//                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//                   textAlign: TextAlign.center,
-//                 ),
-//                 const SizedBox(height: 20),
-//                 ...currentOffering.availablePackages.map((package) {
-//                   return Card(
-//                     elevation: 4,
-//                     margin: const EdgeInsets.symmetric(vertical: 8),
-//                     child: InkWell(
-//                       onTap: () => controller.purchasePackage(package),
-//                       child: Padding(
-//                         padding: const EdgeInsets.all(16),
-//                         child: Column(
-//                           children: [
-//                             Text(
-//                               package.storeProduct.title,
-//                               style: const TextStyle(
-//                                 fontSize: 18,
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                             const SizedBox(height: 8),
-//                             Text(
-//                               package.storeProduct.description,
-//                               textAlign: TextAlign.center,
-//                             ),
-//                             const SizedBox(height: 12),
-//                             Text(
-//                               package.storeProduct.priceString,
-//                               style: const TextStyle(
-//                                 fontSize: 20,
-//                                 color: Colors.purple,
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   );
-//                 }),
-//               ],
-//             ),
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:pranks/Utils/ccolors.dart';
 import 'package:pranks/Utils/const.dart';
-import '../../../Controller/subscriptionController.dart';
+import 'package:pranks/Utils/ccolors.dart';
+import 'package:pranks/Controller/subscriptionController.dart';
 
 class SubscriptionPage extends StatefulWidget {
   const SubscriptionPage({super.key});
@@ -131,146 +12,287 @@ class SubscriptionPage extends StatefulWidget {
 }
 
 class _SubscriptionPageState extends State<SubscriptionPage> {
+  final SubscriptionController controller = Get.put(SubscriptionController());
   int selectedIndex = -1;
-
-  @override
-  void initState() {
-    super.initState();
-    final controller = Get.find<SubscriptionController>();
-    controller.initStore();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: CColors.yellowGradient,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: CColors.yellowGradient,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              backUrl,
+              scale: 1.5,
+            ),
+          ),
+        ),
+        title: const Text(
+          "Premium Access",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            color: CColors.blackColor,
+            wordSpacing: 1,
+          ),
+        ),
+        actions: [
+          // Add restore purchases button
+          TextButton(
+            onPressed: () {
+              controller.restorePurchases();
+              Get.snackbar(
+                'Restoring Purchases',
+                'Checking for previous purchases...',
+                duration: const Duration(seconds: 2),
+              );
+            },
+            child: const Text(
+              'Restore',
+              style: TextStyle(
+                color: CColors.blackColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          centerTitle: true,
-          leading: GestureDetector(
-              onTap: () => Get.back(),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  backUrl,
-                  height: 15,
-                  width: 15,
-                ),
-              )),
-          title: const Text("Subscription",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: CColors.blackColor,
-                wordSpacing: 1,
-              ))),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              "",
-              scale: 4,
-            ),
-            const Text("Get Premium",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: CColors.blackColor,
-                  fontWeight: FontWeight.bold,
-                )),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  const Text(
-                    "Choose Your Prankster Plan!",
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        ],
+      ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(child: SizedBox(
+            width: 30,
+            height: 30,
+            child: CircularProgressIndicator(
+              strokeWidth: 7,
+              color: CColors.yellowColor,
+            )));
+        }
+
+        if (controller.isSubscribed.value) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green.shade100,
                   ),
-                  const SizedBox(height: 5),
-                  const Text(
-                    "Unlock all premium pranks and sound effects",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: CColors.blackColor,
-                      fontWeight: FontWeight.bold,
+                  child: const Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 64,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'You\'re a Premium Prankster!',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    'You have full access to all premium pranks and sound effects!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: () => Get.back(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: CColors.blackColor,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 12,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  SubscriptionWidget(
-                    title: "1 Month Prankster",
-                    subtitle: "Access to all premium pranks and sound effects",
-                    price: "\$ 12.44",
-                    isSelected: selectedIndex == 0,
-                    onTap: () => setState(() => selectedIndex = 0),
+                  child: const Text(
+                    'Continue Pranking',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  SubscriptionWidget(
-                    title: "6 Months Master Prankster",
-                    subtitle: "Save 30% + Exclusive monthly prank ideas",
-                    price: "\$ 10.44",
-                    isSelected: selectedIndex == 1,
-                    onTap: () => setState(() => selectedIndex = 1),
-                  ),
-                  const SizedBox(height: 20),
-                  SubscriptionWidget(
-                    title: "12 Months Prank Legend",
-                    subtitle: "Best value! Save 50% + VIP prank content",
-                    price: "\$ 8.44",
-                    isSelected: selectedIndex == 2,
-                    onTap: () => setState(() => selectedIndex = 2),
-                  ),
-                  const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      if (selectedIndex >= 0) {
-                        final controller = Get.find<SubscriptionController>();
-                        final product = ProductDetails(
-                          id: controller.products[selectedIndex].id,
-                          title: controller.products[selectedIndex].title,
-                          description:
-                              controller.products[selectedIndex].description,
-                          price: "55",
-                          rawPrice: 123,
-                          currencyCode:
-                              controller.products[selectedIndex].currencyCode,
-                        );
-                        controller.buySubscription(
-                            controller.products[selectedIndex]);
-                      }
-                    },
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
+                ),
+              ],
+            ),
+          );
+        }
+
+        final currentOffering = controller.offerings.value?.current;
+        if (currentOffering == null || currentOffering.availablePackages.isEmpty) {
+          return const Center(
+            child: Text('No subscription packages available right now.'),
+          );
+        }
+
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/images/premium_banner.png", // Make sure to add this asset
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                "Unlock All Premium Pranks",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: CColors.blackColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+
+                    // Benefits section
+                    Container(
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: CColors.blackColor,
-                        borderRadius: BorderRadius.circular(32),
-                        border:
-                            Border.all(color: CColors.blackColor, width: 2.0),
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Continue",
-                          style: TextStyle(
-                            fontSize: 22,
-                            letterSpacing: 2,
-                            color: CColors.whiteColor,
-                            fontWeight: FontWeight.bold,
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Premium Benefits:",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          _buildBenefitRow(
+                            Icons.lock_open,
+                            "Unlock all premium prank sounds",
+                          ),
+                          _buildBenefitRow(
+                            Icons.block,
+                            "No advertisements",
+                          ),
+                          _buildBenefitRow(
+                            Icons.new_releases,
+                            "Early access to new pranks",
+                          ),
+                          _buildBenefitRow(
+                            Icons.refresh,
+                            "Regular content updates",
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    
+                    // Subscription options
+                    ...currentOffering.availablePackages.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final package = entry.value;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: SubscriptionWidget(
+                          title: package.storeProduct.title,
+                          subtitle: package.storeProduct.description,
+                          price: package.storeProduct.priceString,
+                          isSelected: selectedIndex == index,
+                          onTap: () => setState(() => selectedIndex = index),
+                        ),
+                      );
+                    }),
+                    
+                    const SizedBox(height: 20),
+                    
+                    // Subscribe button
+                    GestureDetector(
+                      onTap: () {
+                        if (selectedIndex >= 0 && selectedIndex < currentOffering.availablePackages.length) {
+                          final package = currentOffering.availablePackages[selectedIndex];
+                          controller.purchasePackage(package);
+                        } else {
+                          Get.snackbar(
+                            'Selection Required',
+                            'Please select a subscription plan',
+                            backgroundColor: Colors.red.shade100,
+                          );
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: CColors.blackColor,
+                          borderRadius: BorderRadius.circular(32),
+                          border: Border.all(color: CColors.blackColor, width: 2.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Subscribe Now",
+                            style: TextStyle(
+                              fontSize: 22,
+                              letterSpacing: 2,
+                              color: CColors.whiteColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
+                    
+                    const SizedBox(height: 16),
+                    
+                    // Terms text
+                    const Text(
+                      "Subscription will automatically renew. Cancel anytime through your app store settings.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+  
+  Widget _buildBenefitRow(IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.green),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 16),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -316,28 +338,26 @@ class SubscriptionWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color:
-                          isSelected ? CColors.whiteColor : CColors.blackColor,
+                      color: isSelected ? CColors.whiteColor : CColors.blackColor,
                     ),
                   ),
                   Text(
                     subtitle,
                     style: TextStyle(
                       fontSize: 14,
-                      color:
-                          isSelected ? CColors.whiteColor : CColors.blackColor,
+                      color: isSelected ? CColors.whiteColor : CColors.blackColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-            //Show the text of the price of the dollar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
               decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                  color: isSelected ? CColors.whiteColor : CColors.blackColor),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                color: isSelected ? CColors.whiteColor : CColors.blackColor,
+              ),
               child: Text(
                 price,
                 style: TextStyle(

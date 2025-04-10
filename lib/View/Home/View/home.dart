@@ -87,6 +87,17 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
+  // Helper method to determine if an icon needs special sizing
+  double getIconScale(String label) {
+    // Increase size for specific icons
+    if (label == 'Burp Sound' ||
+        label == 'DoorBell Sound' ||
+        label == 'Fart Sound') {
+      return 1.8; // 40% larger than standard
+    }
+    return 0.9; // Standard size for other icons
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,15 +125,20 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-        title: const Text(
-          "Pranks",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-            wordSpacing: 3,
-            color: CColors.whiteColor,
-          ),
-        ),
+        title: const Text("Pranks",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: CColors.blackColor,
+              wordSpacing: 1,
+              shadows: [
+                                  Shadow(
+                                    color: CColors.blackColor,
+                                    offset: Offset(0, 2),
+                                    blurRadius: 3,
+                                  ),
+                                ],
+            )),
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(8.0),
@@ -134,6 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         itemCount: carouselData.length,
         itemBuilder: (context, index) {
+          // Get the scaling factor for this particular icon
+          final scale = getIconScale(carouselData[index].label);
+
           return GestureDetector(
             onTap: () => Get.to(() => PrankScreen(item: carouselData[index])),
             child: Padding(
@@ -159,14 +178,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12),
-                    child: SizedBox(
-                      width: 100, 
-                      height: 100, 
-                      child: Image.asset(
-                        carouselData[index].image,
-                    
-                        fit: BoxFit
-                            .contain, // Ensures it fits within the given size
+                    child: Center(
+                      child: Transform.scale(
+                        scale: scale,
+                        child: Image.asset(
+                          carouselData[index].image,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ),

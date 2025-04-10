@@ -10,6 +10,8 @@ class PrankScreen extends StatelessWidget {
 
   const PrankScreen({super.key, required this.item});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +21,17 @@ class PrankScreen extends StatelessWidget {
             item.label,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              color: CColors.whiteColor,
               fontSize: 30,
-              wordSpacing: 3,
-            ),
+              color: CColors.blackColor,
+              wordSpacing: 1,
+              shadows: [
+                                  Shadow(
+                                    color: CColors.blackColor,
+                                    offset: Offset(0, 2),
+                                    blurRadius: 3,
+                                  ),
+                                ],
+            )
           ),
           leading: GestureDetector(
             onTap: () => Get.back(),
@@ -50,7 +59,6 @@ class PrankScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                // Navigate to PrankScreen with the selected item data
                 //  Get.to(() => PrankScrseen(item: carouselData[index]));
                 Get.to(() => PrankScreenView(
                       label: item.label,
@@ -85,6 +93,7 @@ class PrankScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                       child: Image.asset(
                         item.images[index],
+                        
                         fit: BoxFit.cover,
                       ),
                     ),

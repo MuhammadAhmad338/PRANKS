@@ -133,30 +133,14 @@ class _PrankScreenViewState extends State<PrankScreenView>
                               widget.label,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: CColors.whiteColor,
+                                color: CColors.blackColor,
                                 shadows: [
                                   Shadow(
-                                    color: CColors.purpleAccentColor,
-                                    offset: Offset(3, 3),
-                                    blurRadius: 0,
-                                  ),
-                                  Shadow(
-                                    color: CColors.purpleAccentColor,
-                                    offset: Offset(-2, -2),
-                                    blurRadius: 0,
-                                  ),
-                                  Shadow(
-                                    color: CColors.purpleAccentColor,
-                                    offset: Offset(2, -2),
-                                    blurRadius: 0,
-                                  ),
-                                  Shadow(
-                                    color: CColors.purpleAccentColor,
-                                    offset: Offset(-2, 2),
-                                    blurRadius: 0,
+                                    color: CColors.blackColor,
+                                    offset: Offset(0, 2),
+                                    blurRadius: 3,
                                   ),
                                 ],
-                                letterSpacing: 2,
                                 fontSize: 28,
                               ),
                               textAlign: TextAlign.center,

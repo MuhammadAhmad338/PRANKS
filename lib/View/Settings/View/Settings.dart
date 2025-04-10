@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pranks/Utils/ccolors.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:pranks/Widgets/customAppBar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../Controller/flashController.dart';
 import '../../../Controller/switchController.dart';
 import 'package:pranks/Widgets/switchListTile.dart';
@@ -19,7 +20,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final SwitchViewModel switchViewModel = Get.find<SwitchViewModel>();
-    final FlashlightController flashlightController = Get.find<FlashlightController>();
+    final FlashlightController flashlightController =
+        Get.find<FlashlightController>();
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Settings"),
@@ -69,8 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 3), // Spacing between cards
-            // Second Card
+            const SizedBox(height: 3),
             Container(
               margin: const EdgeInsets.symmetric(
                 vertical: 2,
@@ -90,8 +91,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
               child: Card(
-                elevation: 0, // Remove default card elevation
-                margin: EdgeInsets.zero, // Remove default card margin
+                elevation: 0,
+                margin: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -102,24 +103,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         "Subscription",
                         style: TextStyle(fontSize: 20),
                       ),
-                      onTap: () {
-                        Get.to(() => const SubscriptionPage());
-                      },
+                      onTap: () => Get.to(() => const SubscriptionPage()),
                     ),
                     ListTile(
                       title: const Text(
                         "Rate Us",
                         style: TextStyle(fontSize: 20),
                       ),
-                      onTap: () {
-                        Get.snackbar(
-                          "Notice",
-                          "Rate us feature will be available soon",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: CColors.yellowColor,
-                          colorText: CColors.blackColor,
-                          duration: const Duration(seconds: 2),
-                        );
+                      onTap: () async {
+                        final Uri url = Uri.parse(
+                            "https://play.google.com/store/apps/details?id=com.yourprankname.pranks");
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url,
+                              mode: LaunchMode.externalApplication);
+                        } else {
+                          // fallback message
+                          Get.snackbar(
+                            "Error",
+                            "Could not open the store link.",
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
                       },
                     ),
                     ListTile(
@@ -127,8 +131,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         "Privacy Policy",
                         style: TextStyle(fontSize: 20),
                       ),
-                      onTap: () {
-                        // Get.to(() => const PrivacyPolicyScreen());
+                      onTap: () async {
+                        final Uri url = Uri.parse(
+                            'https://sites.google.com/view/pranks-privacy-policy/home');
+
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url,
+                              mode: LaunchMode.externalApplication);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
                       },
                     ),
                     ListTile(
@@ -138,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       onTap: () {
                         Share.share(
-                            'Check out this amazing app: https://play.google.com/store/apps/details?id=com.example.yourapp');
+                            'Check out this amazing app: https://play.google.com/store/apps/details?id=com.yourprankname.pranks');
                       },
                     ),
                   ],
